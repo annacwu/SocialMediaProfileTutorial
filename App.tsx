@@ -1,6 +1,9 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { USERS } from './src/data/users';
 
 export default function App() {
+  const myUser = USERS[0];
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topInfo}>
@@ -9,9 +12,9 @@ export default function App() {
         </View>
       
         <View style={styles.userInfoColumn}>
-            <Text style={styles.name}>Anna Wu</Text>
-            <Text style={styles.username}>@banana</Text>
-            <Text style={styles.bio}>Fullstack developer in training!</Text>
+            <Text style={styles.name}>{myUser.firstName} {myUser.lastName}</Text>
+            <Text style={styles.username}>@{myUser.username}</Text>
+            <Text style={styles.bio}>{myUser.bio}</Text>
         </View>
       </View>
     </SafeAreaView>
