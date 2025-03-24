@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         borderRadius: 10,
         flexDirection: 'row',
+        backgroundColor: 'white',
         shadowOffset: {
             width: 1,
             height: 1,
