@@ -6,7 +6,7 @@ import { currentPost } from "../src/store/features/currentPost";
 import { router } from 'expo-router';
 
 const PostDetailPage = () => {
-    const curentPost = useAppSelector(state => state.currentPost);
+    const currentPost = useAppSelector(state => state.currentPost);
 
     const goBack = () => {
         router.back();
