@@ -1,6 +1,8 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Post } from "../model/post";
 import { USERS } from "../data/users";
+import { router } from 'expo-router';
+import { ROUTES } from "../routes";
 
 type Props = {
     post: Post;
@@ -8,11 +10,14 @@ type Props = {
 
 export const PostCard = (props: Props) => {
     const {post} = props;
-
     const userInfo = USERS.find(user => user.id === post.user);
 
+    const goToPostDetailPage = () => {
+        router.push(ROUTES.POST);
+    };
+
     return (
-        <View style={styles.container} >
+        <TouchableOpacity style={styles.container} onPress={goToPostDetailPage}>
             <View style={styles.photoContainer}>
                 <View style={styles.photo} />
             </View>
@@ -21,7 +26,7 @@ export const PostCard = (props: Props) => {
                 <Text>{userInfo?.firstName} {userInfo?.lastName} @{userInfo?.username} </Text>
                 <Text>{post.text}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 
