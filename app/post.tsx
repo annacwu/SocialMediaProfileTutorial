@@ -1,12 +1,26 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { Post } from "../src/model/post";
+import { useAppSelector } from "../src/store";
+import { currentPost } from "../src/store/features/currentPost";
+import { router } from 'expo-router';
 
 const PostDetailPage = () => {
+    const curentPost = useAppSelector(state => state.currentPost);
+
+    const goBack = () => {
+        router.back();
+    };
+
     return (
-        <View>
+        <SafeAreaView>
             <Text>Post Detail Page</Text>
-        </View>
+            <Text>{currentPost.text}</Text>
+
+            <TouchableOpacity onPress={goBack}>
+                <Text>go back</Text>
+            </TouchableOpacity>
+        </SafeAreaView>
     );
 };
 

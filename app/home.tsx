@@ -1,15 +1,16 @@
 import React from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import { POSTS } from "../src/data/posts";
 import { PostCard } from "../src/components/PostCard";
+import { SafeAreaView } from "react-native";
 
 const Home = () => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView}>
-                {POSTS.map(post => <PostCard post={post} key={post.id}/>)}
+                {POSTS.map(post => <PostCard post={post} key={post.id} />)}
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 };
 

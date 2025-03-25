@@ -3,6 +3,8 @@ import { Post } from "../model/post";
 import { USERS } from "../data/users";
 import { router } from 'expo-router';
 import { ROUTES } from "../routes";
+import { useAppDispatch } from "../store";
+import { CurrentPostActions } from "../store/features/currentPost";
 
 type Props = {
     post: Post;
@@ -10,9 +12,13 @@ type Props = {
 
 export const PostCard = (props: Props) => {
     const {post} = props;
+    const dispatch = useAppDispatch();
+
+
     const userInfo = USERS.find(user => user.id === post.user);
 
     const goToPostDetailPage = () => {
+        dispatch(CurrentPostActions.setCurrentPost(post));
         router.push(ROUTES.POST);
     };
 
