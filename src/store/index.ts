@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import currentPost from './features/currentPost';
 import currentUser from './features/currentUser';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import user from './features/user';
 
 const store = configureStore({
   reducer: {
     currentPost,
     currentUser,
+    user,
   },
 });
 
