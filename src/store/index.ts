@@ -6,8 +6,17 @@ import user from './features/user';
 
 const store = configureStore({
   reducer: {
+    /***
+     * When the User visits the PostDetailPage, the currentPost slice of state is updated with the current post.
+     */
     currentPost,
+    /***
+     * When the User visits the UserDetailPage, the currentUser slice of state is updated with the current user.
+     */
     currentUser,
+    /***
+     * The currently logged in user is stored in the user slice of state.
+     */
     user,
   },
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Post } from "../src/model/post";
 import { useAppDispatch, useAppSelector } from "../src/store";
 import { currentPost } from "../src/store/features/currentPost";
@@ -7,6 +7,7 @@ import { router } from 'expo-router';
 import { USERS } from "../src/data/users";
 import { CurrentUserActions } from "../src/store/features/currentUser";
 import { ROUTES } from "../src/routes";
+import { Header } from "../src/components/Header";
 
 const PostDetailPage = () => {
 const dispatch = useAppDispatch();
@@ -26,6 +27,17 @@ const dispatch = useAppDispatch();
 
     return (
         <SafeAreaView>
+            <Header 
+                leftButton={{
+                    child: <Image source={require('../assets/back.png')} style={styles.backImage} />,
+                    onPress: goBack
+                }}
+                rightButton={{
+                    child: <Image source={require('../assets/back.png')} style={styles.backImage} />,
+                    onPress: goBack
+                }}
+                showLogo
+            />
             <TouchableOpacity onPress={goBack}>
                 <Text>go back</Text>
             </TouchableOpacity>
@@ -41,3 +53,10 @@ const dispatch = useAppDispatch();
 };
 
 export default PostDetailPage;
+
+const styles = StyleSheet.create({
+    backImage: {
+        height: 20,
+        width: 20,
+    },
+});
