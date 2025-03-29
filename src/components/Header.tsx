@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Image } from "react-native";
+
 
 type HeaderButton = {
-    child: JSX.Element;
+    child?: JSX.Element;
     onPress: () => void;
 }
 
@@ -26,7 +27,7 @@ export const Header = (props: Props) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.leftButtonContainer} onPress={leftButtonPress}>
-                {leftButton?.child || null}
+                {leftButton?.child ||  leftButton?.onPress && <Image source={require('../../assets/back.png')} style={styles.backImage} /> || null }
             </TouchableOpacity>
 
             <View>
@@ -68,5 +69,9 @@ const styles = StyleSheet.create({
         width: 20,
         backgroundColor: 'blue',
         borderRadius: 10,
+    },
+    backImage: {
+        height: 20,
+        width: 20
     }
 });
