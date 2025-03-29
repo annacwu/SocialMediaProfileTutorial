@@ -30,7 +30,7 @@ export const Header = (props: Props) => {
             </TouchableOpacity>
 
             <View>
-                {showLogo ? <View style={styles.logo} />: null }
+                {showLogo ? <View style={styles.logo} /> : null }
             </View>
 
             <TouchableOpacity style={styles.rightButtonContainer} onPress={rightButtonPress}>
@@ -46,14 +46,23 @@ const styles = StyleSheet.create({
         height: 40,
         width: '100%',
         borderBottomWidth: 0.5,
-        borderBottomColor: 'grey',
-        backgroundColor: 'pink',
+        borderBottomColor: '#EEEEEE',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 10
     },
-    leftButtonContainer: {},
-    rightButtonContainer: {},
+    leftButtonContainer: { // need this so that it doesnt shift the other components if there isnt actually something there
+        height: 30,
+        width: 30, 
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    rightButtonContainer: {
+        height: 30,
+        width: 30, 
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     logo: {
         height: 20,
         width: 20,
