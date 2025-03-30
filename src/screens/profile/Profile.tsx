@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { USERS } from '../../data/users';
 import { POSTS } from '../../data/posts';
 import { PostCard } from '../../components/PostCard';
-import { UserInfo } from '../../components/UserInfo';
+import { UserInfo } from '../../components/user/UserInfo';
 
 const Profile = () => {
   const myUser = USERS[0];
