@@ -3,6 +3,7 @@ import currentPost from './features/currentPost';
 import currentUser from './features/currentUser';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import user from './features/user';
+import posts from './features/posts';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,10 @@ const store = configureStore({
      * The currently logged in user is stored in the user slice of state.
      */
     user,
+    /**
+     * posts dump
+     */
+    posts,
   },
 });
 

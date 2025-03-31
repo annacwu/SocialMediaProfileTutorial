@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { ScrollView, StyleSheet, Text } from "react-native";
 import { Spacing } from "../Spacing";
+import { useAppSelector } from "../../store";
+import { PostCard } from "../PostCard";
 
 
 type Props = {
@@ -10,14 +12,20 @@ type Props = {
 export const Posts = (props: Props) => {
     const {isActive} = props;
 
+    const currentUser = useAppSelector(state => state.currentUser);
+    const posts = useAppSelector(state => state.posts);
+
+    const postsForUser = useMemo(() => {
+        return Object.values(posts).filter(post => post.user === currentUser.id).sort((a,b) => b.createdDate - a.createdDate);
+    }, []);
+
     if (!isActive) {
         return null;
     }
 
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContentContainer}>
-            <Text>POSTS</Text>
-            {/* {POSTS.map(post => <PostCard post={post} key={post.id} />)} */}
+            {postsForUser.map(post => <PostCard post={post} key={post.id} />)}
 
             <Spacing vertical={100} />
         </ScrollView>
