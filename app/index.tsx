@@ -12,7 +12,7 @@ const Root = () => {
     dispatch(PostsActions.addPosts(POSTS));
   }, []);
 
-  return <Redirect href={ROUTES.HOME} />;
+  return <Redirect href={ROUTES.ROOT} />;
 }
 
 export default Root;
