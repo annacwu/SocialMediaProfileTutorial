@@ -8,7 +8,9 @@ const initialState: UserInitialState = {
     name: '',
     email: '',
     username: '',
-    bio: ''
+    bio: '',
+    createdDate: 0,
+    createdDateString: ''
 }
 
 export const user = createSlice({

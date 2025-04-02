@@ -1,5 +1,6 @@
 import { AppThunk } from "..";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 type CreateUserAccountThunkProps = {
     password: string;
@@ -10,7 +11,6 @@ type CreateUserAccountThunkProps = {
 export const createUserAccountThunk = (
     props: CreateUserAccountThunkProps
 ): AppThunk<void> => {
-    const auth = getAuth();
     const { password, onSuccess, onError } = props;
 
     return async (dispatch, state) => {
@@ -18,9 +18,10 @@ export const createUserAccountThunk = (
             const newUser = Object.assign({}, state().user);
             newUser.createdDate = Date.now();
 
-            createUserWithEmailAndPassword(auth, newUser.email, password);
+            await createUserWithEmailAndPassword(auth, newUser.email, password);
         } catch (error) {
             console.log(error);
+            return onError();
         }
     };
 };
