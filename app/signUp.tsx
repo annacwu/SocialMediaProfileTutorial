@@ -7,13 +7,22 @@ import { InputLabel } from "../src/components/InputLabel";
 import { Spacing } from "../src/components/Spacing";
 import { ContinueButton } from "../src/components/ContinueButton";
 import { ButtonText } from "../src/components/ButtonText";
+import { createUserAccountThunk } from "../src/store/thunks/user-thunk";
+import { AppThunk, useAppDispatch, useAppSelector } from "../src/store";
+import { UserActions } from "../src/store/features/user";
 
 const SignUp = () => {
-    const [email, setEmail] = useState('');
+    const dispatch = useAppDispatch();
+    const user = useAppSelector((state) => state.user);
+
     const [password, setPassword] = useState('');
 
     const createAccount = () => {
         console.log("Create account");
+        const onSuccess = () => {};
+        const onError = () => {};
+
+        dispatch(createUserAccountThunk({ password, onSuccess, onError }))
     };
 
     return (
@@ -27,16 +36,40 @@ const SignUp = () => {
             </View>
 
             <View style={styles.elementContainer}>
-                <InputLabel text="Email" />
+                <InputLabel text="Name" />
                 <AppInput 
-                value={email} 
-                onChangeText={setEmail} 
+                value={user.name} 
+                onChangeText={(text) => dispatch(UserActions.setName(text))} 
                 autoCapitalize="none" 
                 autoCorrect={false} 
                 />
             </View>
 
-            <Spacing vertical={10} />
+           <Spacing vertical={5} /> 
+
+           <View style={styles.elementContainer}>
+                <InputLabel text="Username" />
+                <AppInput 
+                value={user.username} 
+                onChangeText={(text) => dispatch(UserActions.setUsername(text))} 
+                autoCapitalize="none" 
+                autoCorrect={false} 
+                />
+            </View>
+
+           <Spacing vertical={5} /> 
+
+            <View style={styles.elementContainer}>
+                <InputLabel text="Email" />
+                <AppInput 
+                value={user.email} 
+                onChangeText={(text) => dispatch(UserActions.setEmail(text))} 
+                autoCapitalize="none" 
+                autoCorrect={false} 
+                />
+            </View>
+
+            <Spacing vertical={5} />
 
             <View style={styles.elementContainer}>
                 <InputLabel text="Password" />
@@ -79,3 +112,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     }
 });
+
+function dispatch(arg0: AppThunk<void>) {
+    throw new Error("Function not implemented.");
+}
