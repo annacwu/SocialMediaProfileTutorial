@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Text, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Header } from "../src/components/Header";
 import { AppInput } from "../src/components/AppInput";
@@ -10,6 +10,9 @@ import { ButtonText } from "../src/components/ButtonText";
 import { createUserAccountThunk } from "../src/store/thunks/user-thunk";
 import { AppThunk, useAppDispatch, useAppSelector } from "../src/store";
 import { UserActions } from "../src/store/features/user";
+import { auth } from "../firebaseConfig";
+import { router } from "expo-router";
+import { ROUTES } from "../src/routes";
 
 const SignUp = () => {
     const dispatch = useAppDispatch();
@@ -17,10 +20,13 @@ const SignUp = () => {
 
     const [password, setPassword] = useState('');
 
+    // useEffect(() => {
+    //     auth.signOut();
+    // }, []);
+
     const createAccount = () => {
-        console.log("Create account");
-        const onSuccess = () => {};
-        const onError = () => {};
+        const onSuccess = () => router.push(ROUTES.HOME);
+        const onError = () => Alert.alert('Could not create account', 'Please try again');
 
         dispatch(createUserAccountThunk({ password, onSuccess, onError }))
     };
@@ -113,6 +119,3 @@ const styles = StyleSheet.create({
     }
 });
 
-function dispatch(arg0: AppThunk<void>) {
-    throw new Error("Function not implemented.");
-}
