@@ -14,6 +14,7 @@ const Root = () => {
     const goToSignUp = () => router.push(ROUTES.SIGN_UP);
     const goToApp = () => router.push(ROUTES.HOME);
 
+    // this is the auto-login function
     useEffect(() => {
         console.log("Listening for auth state changes...");
         

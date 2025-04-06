@@ -1,0 +1,24 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { User } from '../../model/user';
+
+type UsersInitialState = {
+    [key: string]: User;
+};
+
+const initialState: UsersInitialState = {}
+
+export const users = createSlice({
+    name: 'users',
+    initialState,
+    reducers: {
+        addUsers: (state, action: PayloadAction<User[]>) => {
+            action.payload.map(post => {
+                state[post.id] = post;
+            });
+        },
+    },
+});
+
+export const UsersActions = users.actions;
+
+export default users.reducer;

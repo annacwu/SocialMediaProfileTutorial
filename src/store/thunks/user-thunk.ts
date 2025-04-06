@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { createUserDocument, getUserDocumentWithEmail } from "../../services/user";
 import { FIREBASE_COLLECTIONS, generateFirebaseId } from "../../api/firestore/utils";
 import { UserActions } from "../features/user";
+import { UsersActions } from "../features/users";
 
 type CreateUserAccountThunkProps = {
     password: string;
@@ -51,7 +52,12 @@ export const logInUserThunk = (
             console.log("IN USER THUNK");
             const user = await getUserDocumentWithEmail(email);
 
-            dispatch(UserActions.setUser(user));
+            if (user) {
+                dispatch(UserActions.setUser(user));
+                dispatch(UsersActions.addUsers([user]));
+            } else {
+                console.warn("User not found for email:", email);
+            }
 
             onSuccess();
         } catch (error) {

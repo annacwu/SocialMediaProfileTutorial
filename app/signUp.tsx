@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Header } from "../src/components/Header";
@@ -8,9 +8,8 @@ import { Spacing } from "../src/components/Spacing";
 import { ContinueButton } from "../src/components/ContinueButton";
 import { ButtonText } from "../src/components/ButtonText";
 import { createUserAccountThunk } from "../src/store/thunks/user-thunk";
-import { AppThunk, useAppDispatch, useAppSelector } from "../src/store";
+import { useAppDispatch, useAppSelector } from "../src/store";
 import { UserActions } from "../src/store/features/user";
-import { auth } from "../firebaseConfig";
 import { router } from "expo-router";
 import { ROUTES } from "../src/routes";
 
@@ -19,10 +18,6 @@ const SignUp = () => {
     const user = useAppSelector((state) => state.user);
 
     const [password, setPassword] = useState('');
-
-    // useEffect(() => {
-    //     auth.signOut();
-    // }, []);
 
     const createAccount = () => {
         const onSuccess = () => router.push(ROUTES.HOME);

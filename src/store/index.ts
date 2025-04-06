@@ -4,6 +4,7 @@ import currentUser from './features/currentUser';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import user from './features/user';
 import posts from './features/posts';
+import users from './features/users';
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,10 @@ const store = configureStore({
      * posts dump
      */
     posts,
+    /**
+     * store user documents in this slice
+     */
+    users,
   },
 });
 
