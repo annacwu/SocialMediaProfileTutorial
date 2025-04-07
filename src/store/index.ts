@@ -5,6 +5,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import user from './features/user';
 import posts from './features/posts';
 import users from './features/users';
+import postBuilder from './features/postBuilder';
 
 const store = configureStore({
   reducer: {
@@ -28,6 +29,10 @@ const store = configureStore({
      * store user documents in this slice
      */
     users,
+    /**
+     * controls state of the postbuildermodal
+     */
+    postBuilder,
   },
 });
 

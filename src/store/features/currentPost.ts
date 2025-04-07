@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {Post} from '../../model/post';
 
 type CurrentPostInitialState = Post;
@@ -15,8 +15,12 @@ export const currentPost = createSlice({
     initialState,
     reducers: {
         setCurrentPost: (state, action) => {
-            return action.payload
+            return action.payload;
         },
+        setDescription: (state, action: PayloadAction<string>) => {
+            state.text = action.payload;
+        },
+        reset: () => initialState,
     },
 });
 

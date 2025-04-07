@@ -17,7 +17,7 @@ export const ContinueButton = (props: Props) => {
     };
 
     return (
-        <TouchableOpacity onPress={onPress} style={styles.container}>
+        <TouchableOpacity onPress={onPress} style={localButtonStyles}>
             {child}
         </TouchableOpacity>
     );
