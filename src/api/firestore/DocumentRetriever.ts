@@ -1,5 +1,5 @@
 import { firestore } from "../../../firebaseConfig";
-import { doc, FieldPath, WhereFilterOp, getDoc, getDocs, collection, where, query } from "firebase/firestore";
+import { doc, FieldPath, WhereFilterOp, getDoc, getDocs, collection, where, query, QuerySnapshot } from "firebase/firestore";
 
 export const getDocumentWithPathAndId = async (path: string, documentId: string) => {
     try {
@@ -42,3 +42,20 @@ export const getDocumentWithCriteria = async (path: string, criteria: WhereCrite
         return [];
     }
 }
+
+export const getAllDocumentsWithPath = async (path: string) => {
+    try {
+        const collectionRef = collection(firestore, path);
+        const querySnapshot = await getDocs(collectionRef);
+
+        const documents = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
+        return documents;
+    } catch (error) {
+        console.error("Error fetching documents:", error);
+        return null;
+    }
+};

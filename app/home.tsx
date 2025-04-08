@@ -9,6 +9,9 @@ import { ButtonText } from "../src/components/ButtonText";
 import { PRIMARY } from "../src/utils/colors";
 import { PostBuilderActions } from "../src/store/features/postBuilder";
 import { CurrentPostActions } from "../src/store/features/currentPost";
+import { ROUTES } from "../src/routes";
+import { auth } from "../firebaseConfig";
+import { router } from "expo-router";
 
 const Home = () => {
     const dispatch = useAppDispatch();
@@ -23,9 +26,18 @@ const Home = () => {
         dispatch(PostBuilderActions.setIsPostModalOpen(true));
     };
 
+    const signOut = () => {
+        auth.signOut();
+        router.replace(ROUTES.ROOT); 
+    };
+
     return (
         <SafeAreaView style={styles.container} edges={['top']}> 
-            <Header showLogo />
+            <Header showLogo rightButton={{
+                child: <Text>Sign Out</Text>,
+                onPress: signOut,
+                }}
+            />
             <ScrollView contentContainerStyle={styles.scrollViewConentContainer} showsVerticalScrollIndicator={false}>
                 {postsToShow.map(post => <PostCard post={post} key={post.id} />)}
 

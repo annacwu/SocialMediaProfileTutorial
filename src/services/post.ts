@@ -1,5 +1,5 @@
 import { createDocumentWithId } from "../api/firestore/DocumentMutator";
-import { getDocumentWithCriteria, WhereCriteria } from "../api/firestore/DocumentRetriever";
+import { getAllDocumentsWithPath, getDocumentWithCriteria, WhereCriteria } from "../api/firestore/DocumentRetriever";
 import { FIREBASE_COLLECTIONS } from "../api/firestore/utils";
 import { Post } from "../model/post";
 
@@ -21,4 +21,10 @@ export const getPostsForUser = async (user: string) => {
         return null;
     }
     return resp as Post[]; // TEMPORARY FIX
+}
+
+// we don't have enough users to make a super specific data flow for which posts are shown
+export const getAllPosts = async () => {
+    const resp = await getAllDocumentsWithPath(FIREBASE_COLLECTIONS.POST);
+    return resp as Post[];
 }

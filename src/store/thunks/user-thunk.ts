@@ -1,11 +1,11 @@
 import { AppThunk } from "..";
 import { auth } from "../../../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { createUserDocument, getUserDocumentWithEmail } from "../../services/user";
+import { createUserDocument, getAllUsers, getUserDocumentWithEmail } from "../../services/user";
 import { FIREBASE_COLLECTIONS, generateFirebaseId } from "../../api/firestore/utils";
 import { UserActions } from "../features/user";
 import { UsersActions } from "../features/users";
-import { getPostsForUserThunk } from "./posts-thunk";
+import { getAllPostsThunk, getPostsForUserThunk } from "./posts-thunk";
 
 type CreateUserAccountThunkProps = {
     password: string;
@@ -56,7 +56,8 @@ export const logInUserThunk = (
                 dispatch(UserActions.setUser(user));
                 dispatch(UsersActions.addUsers([user]));
 
-                dispatch(getPostsForUserThunk(user.id));
+                dispatch(getAllPostsThunk());
+                dispatch(getAllUsersThunk());
             } else {
                 console.warn("User not found for email:", email);
             }
@@ -65,6 +66,19 @@ export const logInUserThunk = (
         } catch (error) {
             console.log(error);
             return onError();
+        }
+    };
+};
+
+export const getAllUsersThunk = (): AppThunk<void> => {
+    return async (dispatch, state) => {
+        try {
+            const users = await getAllUsers();
+            if (users) {
+                dispatch(UsersActions.addUsers(users));
+            }
+        } catch (error) {
+            console.log('Could not retrieve all users', error);
         }
     };
 };

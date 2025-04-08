@@ -1,5 +1,5 @@
 import { createDocumentWithId } from "../api/firestore/DocumentMutator";
-import { getDocumentWithCriteria, getDocumentWithPathAndId, WhereCriteria } from "../api/firestore/DocumentRetriever";
+import { getAllDocumentsWithPath, getDocumentWithCriteria, getDocumentWithPathAndId, WhereCriteria } from "../api/firestore/DocumentRetriever";
 import { FIREBASE_COLLECTIONS } from "../api/firestore/utils";
 import { User } from "../model/user";
 
@@ -21,4 +21,9 @@ export const getUserDocumentWithEmail = async (email: string) => {
         return null;
     }
     return resp[0] as User; // TEMPORARY FIX
+}
+
+export const getAllUsers = async () => {
+    const resp = await getAllDocumentsWithPath(FIREBASE_COLLECTIONS.USER);
+    return resp as User[];
 }
