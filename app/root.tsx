@@ -4,7 +4,7 @@ import { ActivityIndicator, Text, View } from "react-native";
 import { ROUTES } from "../src/routes";
 import { auth } from "../firebaseConfig";
 import { useAppDispatch } from "../src/store";
-import { logInUserThunk } from "../src/store/thunks/user-thunk";
+import { takeUserToAppThunk } from "../src/store/thunks/user-thunk";
 import { onAuthStateChanged } from "firebase/auth";
 
 const Root = () => {
@@ -22,7 +22,7 @@ const Root = () => {
             if (user?.email) {
                 console.log("User is logged in:", user.email);
                 dispatch(
-                    logInUserThunk({ 
+                    takeUserToAppThunk({ 
                         email: user.email, 
                         onSuccess: goToApp, 
                         onError: goToSignUp,

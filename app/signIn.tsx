@@ -7,7 +7,7 @@ import { InputLabel } from "../src/components/InputLabel";
 import { Spacing } from "../src/components/Spacing";
 import { ContinueButton } from "../src/components/ContinueButton";
 import { ButtonText } from "../src/components/ButtonText";
-import { createUserAccountThunk } from "../src/store/thunks/user-thunk";
+import { signInThunk } from "../src/store/thunks/user-thunk";
 import { useAppDispatch, useAppSelector } from "../src/store";
 import { UserActions } from "../src/store/features/user";
 import { router } from "expo-router";
@@ -21,9 +21,9 @@ const SignUp = () => {
 
     const createAccount = () => {
         const onSuccess = () => router.push(ROUTES.HOME);
-        const onError = () => Alert.alert('Could not create account', 'Please try again');
+        const onError = () => Alert.alert('Could not sign in', 'Please try again');
 
-        dispatch(createUserAccountThunk({ password, onSuccess, onError }))
+        dispatch(signInThunk({ password, onSuccess, onError }))
     };
 
     return (
@@ -35,30 +35,6 @@ const SignUp = () => {
                     Welcome to Social Media App
                 </Text>
             </View>
-
-            <View style={styles.elementContainer}>
-                <InputLabel text="Name" />
-                <AppInput 
-                value={user.name} 
-                onChangeText={(text) => dispatch(UserActions.setName(text))} 
-                autoCapitalize="none" 
-                autoCorrect={false} 
-                />
-            </View>
-
-           <Spacing vertical={5} /> 
-
-           <View style={styles.elementContainer}>
-                <InputLabel text="Username" />
-                <AppInput 
-                value={user.username} 
-                onChangeText={(text) => dispatch(UserActions.setUsername(text))} 
-                autoCapitalize="none" 
-                autoCorrect={false} 
-                />
-            </View>
-
-           <Spacing vertical={5} /> 
 
             <View style={styles.elementContainer}>
                 <InputLabel text="Email" />
@@ -87,15 +63,15 @@ const SignUp = () => {
 
             <View style={styles.elementContainer}>
                 <ContinueButton 
-                child={<ButtonText text="Create Account" />}
+                child={<ButtonText text="Sign In" />}
                 onPress={createAccount}
                 />  
             </View>
 
             <Spacing vertical={10} />
 
-            <TouchableOpacity style={styles.elementContainer} onPress={() => router.push(ROUTES.SIGN_IN)}>
-                <Text style={styles.signInText}>Already have an account?</Text>
+            <TouchableOpacity style={styles.elementContainer} onPress={() => router.push(ROUTES.SIGN_UP)}>
+                <Text style={styles.signInText}>Don't have an account?</Text>
             </TouchableOpacity>
 
         </SafeAreaView>

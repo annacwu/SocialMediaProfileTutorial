@@ -1,6 +1,6 @@
 import { AppThunk } from "..";
 import { auth } from "../../../firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { createUserDocument, getAllUsers, getUserDocumentWithEmail } from "../../services/user";
 import { FIREBASE_COLLECTIONS, generateFirebaseId } from "../../api/firestore/utils";
 import { UserActions } from "../features/user";
@@ -37,14 +37,14 @@ export const createUserAccountThunk = (
     };
 };
 
-type LogInUserThunkProps = {
+type TakeUserToAppThunkProps = {
     email: string;
     onSuccess: () => void;
     onError: () => void;
 };
 
-export const logInUserThunk = (
-    props: LogInUserThunkProps
+export const takeUserToAppThunk = (
+    props: TakeUserToAppThunkProps
 ): AppThunk<void> => {
     const { email, onSuccess, onError } = props;
 
@@ -79,6 +79,32 @@ export const getAllUsersThunk = (): AppThunk<void> => {
             }
         } catch (error) {
             console.log('Could not retrieve all users', error);
+        }
+    };
+};
+
+type SignInThunkProps = {
+    password: string;
+    onSuccess: () => void;
+    onError: () => void;
+};
+
+export const signInThunk = (
+    props: SignInThunkProps
+): AppThunk<void> => {
+    const { password, onSuccess, onError } = props;
+
+    return async (dispatch, state) => {
+        const { email } = state().user;
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+
+            dispatch(takeUserToAppThunk({email, onSuccess, onError}));
+
+            onSuccess();
+        } catch (error) {
+            console.log(error);
+            return onError();
         }
     };
 };

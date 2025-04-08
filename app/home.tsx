@@ -28,7 +28,7 @@ const Home = () => {
 
     const signOut = () => {
         auth.signOut();
-        router.replace(ROUTES.ROOT); 
+        router.replace(ROUTES.SIGN_UP); 
     };
 
     return (
