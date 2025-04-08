@@ -14,7 +14,7 @@ export const getFriendshipsForUser = async (user: string) => {
         criteria: user,
     };
 
-    const resp = await getDocumentWithCriteria(FIREBASE_COLLECTIONS.USER, criteria);
+    const resp = await getDocumentWithCriteria(FIREBASE_COLLECTIONS.FRIENDSHIP, criteria);
 
     if (resp === null) {
         console.log("get post doc failed");

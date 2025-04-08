@@ -1,6 +1,7 @@
-import React from "react";
-import { ScrollView, StyleSheet, Text } from "react-native";
+import React, { useMemo } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Spacing } from "../Spacing";
+import { useAppSelector } from "../../store";
 
 
 type Props = {
@@ -10,6 +11,13 @@ type Props = {
 export const Friends = (props: Props) => {
     const {isActive} = props;
 
+    const user = useAppSelector((state) => state.user);
+    const friendships = useAppSelector((state) => state.friendships);
+
+    const friendshipsForUser = useMemo(() => {
+        return Object.values(friendships).filter(a => a.users.includes(user.id));
+    }, [friendships]);
+
     if (!isActive) {
         return null;
     }
@@ -17,7 +25,13 @@ export const Friends = (props: Props) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContentContainer}>
             <Text>FRIENDS</Text>
-            {/* {POSTS.map(post => <PostCard post={post} key={post.id} />)} */}
+            {friendshipsForUser.map(friendship => {
+                return (
+                    <View>
+                        <Text>{friendship.id}</Text>
+                    </View>
+                );
+            })}
 
             <Spacing vertical={100} />
         </ScrollView>

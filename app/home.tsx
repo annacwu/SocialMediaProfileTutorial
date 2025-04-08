@@ -31,9 +31,19 @@ const Home = () => {
         router.replace(ROUTES.SIGN_UP); 
     };
 
+    const goToProfile = () => {
+        router.push(ROUTES.MY_PROFILE);
+    };
+
     return (
         <SafeAreaView style={styles.container} edges={['top']}> 
-            <Header showLogo rightButton={{
+            <Header 
+            leftButton={{
+                child: <Text>Profile</Text>,
+                onPress: goToProfile,
+            }}
+            showLogo 
+            rightButton={{
                 child: <Text>Sign Out</Text>,
                 onPress: signOut,
                 }}

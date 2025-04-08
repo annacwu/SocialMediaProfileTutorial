@@ -6,6 +6,7 @@ import { FIREBASE_COLLECTIONS, generateFirebaseId } from "../../api/firestore/ut
 import { UserActions } from "../features/user";
 import { UsersActions } from "../features/users";
 import { getAllPostsThunk, getPostsForUserThunk } from "./posts-thunk";
+import { getFriendshipsForUserThunk } from "./friendships-thunk";
 
 type CreateUserAccountThunkProps = {
     password: string;
@@ -58,6 +59,7 @@ export const takeUserToAppThunk = (
 
                 dispatch(getAllPostsThunk());
                 dispatch(getAllUsersThunk());
+                dispatch(getFriendshipsForUserThunk(user.id));
             } else {
                 console.warn("User not found for email:", email);
             }

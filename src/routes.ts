@@ -5,4 +5,5 @@ export enum ROUTES {
     USER = 'user/',
     SIGN_UP = 'signUp/',
     SIGN_IN = 'signIn/',
+    MY_PROFILE = 'myProfile/',
 }

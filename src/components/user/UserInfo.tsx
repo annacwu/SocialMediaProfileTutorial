@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { User } from "../../model/user";
 import { ManageFriendshipButton } from "../ManageFriendshipButton";
+import { useAppSelector } from "../../store";
 
 type Props = {
     user: User;
@@ -10,6 +11,8 @@ type Props = {
 
 export const UserInfo = (props: Props) => {
     const {user} = props;
+
+    const loggedInUser = useAppSelector((state) => state.user);
 
     return (
         <View style={styles.topInfo}>
@@ -27,7 +30,9 @@ export const UserInfo = (props: Props) => {
 
             {/* Manage Friendship */}
             <View style={styles.friendshipButton}>
-              <ManageFriendshipButton otherUser={user} />
+              {loggedInUser.id != user.id && (
+                <ManageFriendshipButton otherUser={user} />
+              )}
             </View>
         </View>
     )
