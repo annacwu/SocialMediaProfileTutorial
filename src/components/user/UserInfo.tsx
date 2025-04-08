@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { User } from "../../model/user";
+import { ManageFriendshipButton } from "../ManageFriendshipButton";
 
 type Props = {
     user: User;
@@ -22,6 +23,11 @@ export const UserInfo = (props: Props) => {
                 <Text style={styles.name}>{user.name}</Text>
                 <Text style={styles.username}>@{user.username}</Text>
                 <Text style={styles.bio}>{user.bio}</Text>
+            </View>
+
+            {/* Manage Friendship */}
+            <View style={styles.friendshipButton}>
+              <ManageFriendshipButton otherUser={user} />
             </View>
         </View>
     )
@@ -62,5 +68,10 @@ const styles = StyleSheet.create({
         marginTop: 5,
         fontSize: 13,
         fontWeight: '300'
+      },
+      friendshipButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10
       },
 });

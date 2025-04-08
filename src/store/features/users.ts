@@ -12,8 +12,8 @@ export const users = createSlice({
     initialState,
     reducers: {
         addUsers: (state, action: PayloadAction<User[]>) => {
-            action.payload.map(post => {
-                state[post.id] = post;
+            action.payload.map(user => {
+                state[user.id] = user;
             });
         },
     },

@@ -17,14 +17,14 @@ export const getAllPostsThunk = (): AppThunk<void> => {
 };
 
 export const getPostsForUserThunk = (id: string): AppThunk<void> => {
-return async (dispatch, state) => {
-    try {
-        const postsForUser = await getPostsForUser(id);
-        if (postsForUser) {
-            dispatch(PostsActions.addPosts(postsForUser));
+    return async (dispatch, state) => {
+        try {
+            const postsForUser = await getPostsForUser(id);
+            if (postsForUser) {
+                dispatch(PostsActions.addPosts(postsForUser));
+            }
+        } catch (error) {
+            console.log('Could not retrieve posts for the user', id, error);
         }
-    } catch (error) {
-        console.log('Could not retrieve posts for the user', id, error);
-    }
     };
 };

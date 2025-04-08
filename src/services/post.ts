@@ -9,7 +9,7 @@ export const createPostDocument = async (post: Post) => {
 
 export const getPostsForUser = async (user: string) => {
     const criteria: WhereCriteria = {
-        field: 'user',
+        field: 'users',
         operation: '==',
         criteria: user,
     };

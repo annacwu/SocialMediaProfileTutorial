@@ -6,6 +6,7 @@ import user from './features/user';
 import posts from './features/posts';
 import users from './features/users';
 import postBuilder from './features/postBuilder';
+import friendships from './features/friendships';
 
 const store = configureStore({
   reducer: {
@@ -29,6 +30,10 @@ const store = configureStore({
      * store user documents in this slice
      */
     users,
+    /***
+     * store friendships
+     */
+    friendships,
     /**
      * controls state of the postbuildermodal
      */
