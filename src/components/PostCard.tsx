@@ -1,10 +1,10 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Post } from "../model/post";
-import { USERS } from "../data/users";
 import { router } from 'expo-router';
 import { ROUTES } from "../routes";
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 import { CurrentPostActions } from "../store/features/currentPost";
+import { useMemo } from "react";
 
 type Props = {
     post: Post;
@@ -14,8 +14,8 @@ export const PostCard = (props: Props) => {
     const {post} = props;
     const dispatch = useAppDispatch();
 
-
-    const userInfo = USERS.find(user => user.id === post.user);
+    const users = useAppSelector((state) => state.users);
+    const currentUser = useMemo(() => users[post.user], [users, post.user]);
 
     const goToPostDetailPage = () => {
         dispatch(CurrentPostActions.setCurrentPost(post));
@@ -29,7 +29,7 @@ export const PostCard = (props: Props) => {
             </View>
 
             <View style={styles.content}>
-                <Text>{userInfo?.name} @{userInfo?.username} </Text>
+                <Text>{currentUser?.name} @{currentUser?.username} </Text>
                 <Text>{post.text}</Text>
             </View>
         </TouchableOpacity>
