@@ -18,8 +18,6 @@ const Home = () => {
         return Object.values(posts).sort((a, b) => b.createdDate - a.createdDate);
     }, [posts]);
 
-    console.log('postsToShow', postsToShow);
-
     const createPost = () => {
         dispatch(CurrentPostActions.reset());
         dispatch(PostBuilderActions.setIsPostModalOpen(true));

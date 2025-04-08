@@ -14,7 +14,6 @@ export const getUserDocumentWithEmail = async (email: string) => {
         criteria: email,
     };
 
-    console.log("I MADE IT HERE");
     const resp = await getDocumentWithCriteria(FIREBASE_COLLECTIONS.USER, criteria);
 
     if (resp === null) {
