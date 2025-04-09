@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { useAppSelector } from "../src/store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
@@ -7,6 +7,11 @@ import { StyleSheet } from "react-native";
 import { UserInfo } from "../src/components/user/UserInfo";
 import { useState } from "react";
 import { Posts } from "../src/components/user/Posts";
+import { ROUTES } from "../src/routes";
+
+const MESSAGE_URL = Image.resolveAssetSource(
+    require('../assets/message.png'),
+).uri;
 
 const UserDetailPage = () => {
     const currentUser = useAppSelector(state => state.currentUser);
@@ -17,7 +22,10 @@ const UserDetailPage = () => {
 
     return (
         <SafeAreaView style={styles.safeAreaView} edges={['top']}>
-            <Header leftButton={{onPress: goBack}} showLogo />
+            <Header leftButton={{onPress: goBack}} showLogo rightButton={{
+                child: <Image source={{uri: MESSAGE_URL }} style={styles.messageIcon} />,
+                onPress: () => router.push(ROUTES.MESSAGE_THREAD)
+            }}/>
 
             <View style={styles.main}>
                 <UserInfo user={currentUser} />
@@ -36,5 +44,9 @@ const styles = StyleSheet.create({
     },
     main: {
         paddingTop: 5
+    },
+    messageIcon: {
+        height: 20,
+        width: 20,
     },
 })

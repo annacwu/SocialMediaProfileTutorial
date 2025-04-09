@@ -5,7 +5,6 @@ import { User } from "../model/user";
 import { PRIMARY } from "../utils/colors";
 import { createFriendshipThunk } from "../store/thunks/friendships-thunk";
 import { FRIENDSHIP_STATUS } from "../model/friendship";
-import { Friends } from "./user/Friends";
 
 type Props = {
     otherUser: User;

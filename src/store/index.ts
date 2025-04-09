@@ -7,6 +7,8 @@ import posts from './features/posts';
 import users from './features/users';
 import postBuilder from './features/postBuilder';
 import friendships from './features/friendships';
+import messageThreads from './features/messageThreads';
+import messages  from './features/messages';
 
 const store = configureStore({
   reducer: {
@@ -38,6 +40,8 @@ const store = configureStore({
      * controls state of the postbuildermodal
      */
     postBuilder,
+    messageThreads,
+    messages
   },
 });
 
