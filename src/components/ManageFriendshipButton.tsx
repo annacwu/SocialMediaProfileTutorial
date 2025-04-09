@@ -5,6 +5,7 @@ import { User } from "../model/user";
 import { PRIMARY } from "../utils/colors";
 import { createFriendshipThunk } from "../store/thunks/friendships-thunk";
 import { FRIENDSHIP_STATUS } from "../model/friendship";
+import { Friends } from "./user/Friends";
 
 type Props = {
     otherUser: User;
@@ -33,6 +34,16 @@ export const ManageFriendshipButton = (props: Props) => {
         }
     }, []);
 
+    const onFriendshipButtonPressed =() => {
+        if (existingFriendship) {
+            if (existingFriendship.status === FRIENDSHIP_STATUS.ACCEPTED) {
+                Alert.alert('You are already friends');
+            }
+        } else {
+            addFriend();
+        }
+    };
+
     const addFriend = () => {
         const onSuccess = () => {
             Alert.alert('Friend request sent!');
@@ -45,7 +56,7 @@ export const ManageFriendshipButton = (props: Props) => {
     }
 
     return (
-        <TouchableOpacity style={styles.friendButton} onPress={addFriend}>
+        <TouchableOpacity style={styles.friendButton} onPress={onFriendshipButtonPressed}>
             <Text style={styles.friendText}>
                 {textToShow}
             </Text>

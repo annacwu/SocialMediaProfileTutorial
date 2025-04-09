@@ -5,6 +5,7 @@ import { ROUTES } from "../routes";
 import { useAppDispatch, useAppSelector } from "../store";
 import { CurrentPostActions } from "../store/features/currentPost";
 import { useMemo } from "react";
+import { CARD_SHADOW } from "../utils/styles";
 
 type Props = {
     post: Post;
@@ -44,12 +45,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         flexDirection: 'row',
         backgroundColor: 'white',
-        shadowOffset: {
-            width: 1,
-            height: 1,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 5,
+        ...CARD_SHADOW,
     },
     photoContainer: {
         height: '100%',

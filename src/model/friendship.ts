@@ -7,6 +7,7 @@ export type Friendship = {
     // Metadata
     createdDate: number,
     createdDateString: string,
+    acceptedDate: number,
 };
 
 export enum FRIENDSHIP_STATUS {
